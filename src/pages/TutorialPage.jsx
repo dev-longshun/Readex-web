@@ -23,7 +23,23 @@ const TutorialPage = () => {
           <div>
             <h3 className="text-2xl font-semibold mb-6">导入你的第一本书</h3>
             <p className="text-lg text-apple-text-secondary mb-8 leading-relaxed">
-              Readex 支持 EPUB 和 TXT 两种格式。你可以通过以下方式导入书籍：
+              Readex 支持 EPUB 和 TXT 两种格式的书籍。在导入前请注意：
+            </p>
+            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-8 rounded-r-lg">
+              <p className="text-yellow-800 font-semibold mb-3">⚠️ 重要提示</p>
+              <ul className="space-y-2 text-yellow-700">
+                <li className="flex items-start">
+                  <span className="mr-2">1.</span>
+                  <span>请确保书籍文件<strong>未加密</strong>，不要导入苹果图书、Kindle 等平台下载的受版权保护（加密）的书籍</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">2.</span>
+                  <span>导入前请先将书籍文件保存到 iPhone 的<strong>"文件"</strong> App 中，再从"文件" App 导入</span>
+                </li>
+              </ul>
+            </div>
+            <p className="text-lg text-apple-text-secondary mb-8 leading-relaxed">
+              导入步骤：
             </p>
             <ul className="space-y-3 mb-8">
               <li className="flex items-start">
@@ -32,7 +48,7 @@ const TutorialPage = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">从"文件" App 中选择书籍文件</span>
+                <span className="text-apple-text-secondary">在"文件" App 中选择已保存的书籍文件</span>
               </li>
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
@@ -58,11 +74,11 @@ const TutorialPage = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">双指捏合可快速调整字体大小</span>
+                <span className="text-apple-text-secondary">点击阅读器空白区域可唤出 Overlay 菜单</span>
               </li>
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">点击中央区域显示/隐藏阅读菜单</span>
+                <span className="text-apple-text-secondary">在 Overlay 菜单中点击"设置"可自定义排版和主题</span>
               </li>
             </ul>
             <ImagePlaceholder title="阅读器界面" filename="tutorial-03.png" />
@@ -100,14 +116,14 @@ const TutorialPage = () => {
 
           {/* 收藏生词 */}
           <div>
-            <h3 className="text-2xl font-semibold mb-6">收藏生词</h3>
+            <h3 className="text-2xl font-semibold mb-6">自动收藏生词</h3>
             <p className="text-lg text-apple-text-secondary mb-8 leading-relaxed">
-              查词后点击"收藏"按钮，系统会自动记录学习内容：
+              查词后系统会<strong>自动收藏</strong>，无需手动点击按钮：
             </p>
             <ul className="space-y-3 mb-8">
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">记录单词和释义</span>
+                <span className="text-apple-text-secondary">自动记录单词和释义</span>
               </li>
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
@@ -115,10 +131,10 @@ const TutorialPage = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">标记为"已收藏"（原文中显示为橙色）</span>
+                <span className="text-apple-text-secondary">已收藏单词在原文中显示为橙色</span>
               </li>
             </ul>
-            <ImagePlaceholder title="生词收藏成功提示" filename="tutorial-05.png" />
+            <ImagePlaceholder title="查词后自动收藏" filename="tutorial-05.png" />
           </div>
         </div>
       </TutorialSection>
@@ -126,34 +142,11 @@ const TutorialPage = () => {
       {/* 第二章：进阶技巧 */}
       <TutorialSection title="第二章：进阶技巧">
         <div className="space-y-16">
-          {/* 径向菜单 */}
-          <div>
-            <h3 className="text-2xl font-semibold mb-6">径向菜单</h3>
-            <p className="text-lg text-apple-text-secondary mb-8 leading-relaxed">
-              长按文本区域可呼出快捷操作菜单：
-            </p>
-            <ul className="space-y-3 mb-8">
-              <li className="flex items-start">
-                <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">查词汇：精确查询当前单词</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">查语境：查看整句的翻译和生词</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">拖拽方向选择操作</span>
-              </li>
-            </ul>
-            <ImagePlaceholder title="径向菜单（长按后）" filename="tutorial-06.png" />
-          </div>
-
           {/* 阅读设置 */}
           <div>
             <h3 className="text-2xl font-semibold mb-6">阅读设置</h3>
             <p className="text-lg text-apple-text-secondary mb-8 leading-relaxed">
-              在阅读器中点击设置图标，可自定义阅读体验：
+              点击阅读器空白区域唤出 Overlay 菜单，点击"设置"按钮即可自定义阅读体验：
             </p>
             <ul className="space-y-3 mb-8">
               <li className="flex items-start">
@@ -208,7 +201,7 @@ const TutorialPage = () => {
           <div>
             <h3 className="text-2xl font-semibold mb-6">查看生词列表</h3>
             <p className="text-lg text-apple-text-secondary mb-8 leading-relaxed">
-              在底部标签栏切换到"生词"，即可查看所有收藏的单词：
+              切换到"复习"界面，点击"生词库"即可查看所有收藏的单词：
             </p>
             <ul className="space-y-3 mb-8">
               <li className="flex items-start">
@@ -244,48 +237,48 @@ const TutorialPage = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">高级版支持语境回溯</span>
+                <span className="text-apple-text-secondary">高级版支持语境回溯功能</span>
               </li>
             </ul>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <ImagePlaceholder title="生词详情（语境列表）" filename="tutorial-10.png" />
-              <ImagePlaceholder title="语境回溯动画" filename="tutorial-11.png" />
+              <ImagePlaceholder title="语境回溯" filename="tutorial-11.png" />
             </div>
           </div>
         </div>
       </TutorialSection>
 
-      {/* 第四章：间隔复习 */}
-      <TutorialSection title="第四章：间隔复习">
+      {/* 第四章：复习 */}
+      <TutorialSection title="第四章：复习">
         <div className="space-y-16">
-          {/* 复习主页 */}
+          {/* 复习页面概览 */}
           <div>
-            <h3 className="text-2xl font-semibold mb-6">复习主页</h3>
+            <h3 className="text-2xl font-semibold mb-6">复习页面概览</h3>
             <p className="text-lg text-apple-text-secondary mb-8 leading-relaxed">
-              切换到"复习"标签，查看今日待复习的生词：
+              切换到底部的"复习"标签，可以看到三个功能入口：
             </p>
             <ul className="space-y-3 mb-8">
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">显示今日待复习数量</span>
+                <span className="text-apple-text-secondary"><strong>生词库</strong>：按书籍分类查看所有收藏的单词</span>
               </li>
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">基于 SM-2 算法智能安排复习计划</span>
+                <span className="text-apple-text-secondary"><strong>语境库</strong>：查看所有收录的句子语境</span>
               </li>
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">点击"开始复习"进入复习流程</span>
+                <span className="text-apple-text-secondary"><strong>语境回顾</strong>：查看待复习数量，点击进入复习流程</span>
               </li>
             </ul>
-            <ImagePlaceholder title="复习主页" filename="tutorial-12.png" />
+            <ImagePlaceholder title="复习页面" filename="tutorial-12.png" />
           </div>
 
-          {/* 复习卡片 */}
+          {/* 语境回顾 */}
           <div>
-            <h3 className="text-2xl font-semibold mb-6">复习卡片</h3>
+            <h3 className="text-2xl font-semibold mb-6">语境回顾</h3>
             <p className="text-lg text-apple-text-secondary mb-8 leading-relaxed">
-              每张卡片展示一个生词及其语境，你需要根据自己的掌握程度选择反馈：
+              点击"语境回顾"进入复习界面，每张卡片展示一个语境，你需要根据自己的掌握程度选择反馈：
             </p>
             <ul className="space-y-3 mb-8">
               <li className="flex items-start">
@@ -310,7 +303,7 @@ const TutorialPage = () => {
               </li>
             </ul>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <ImagePlaceholder title="复习卡片界面" filename="tutorial-13.png" />
+              <ImagePlaceholder title="语境回顾界面" filename="tutorial-13.png" />
               <ImagePlaceholder title="五级反馈选择" filename="tutorial-14.png" />
             </div>
           </div>
