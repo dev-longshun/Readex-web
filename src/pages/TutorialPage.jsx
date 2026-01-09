@@ -61,6 +61,70 @@ const TutorialPage = () => {
             </div>
           </div>
 
+          {/* 推荐资源 */}
+          <div>
+            <h3 className="text-2xl font-semibold mb-6">推荐资源</h3>
+            <p className="text-lg text-apple-text-secondary mb-8 leading-relaxed">
+              需要找书？以下网站提供大量免费电子书资源：
+            </p>
+            <div className="space-y-6">
+              <div className="bg-gray-50 rounded-xl p-6">
+                <h4 className="text-xl font-semibold mb-3">Z-Library</h4>
+                <p className="text-apple-text-secondary mb-3">
+                  世界最大的数字图书馆，提供海量的免费电子书下载。
+                </p>
+                <div className="space-y-2">
+                  <a
+                    href="https://zh.zlib.li/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-apple-blue hover:underline"
+                  >
+                    • zh.zlib.li
+                  </a>
+                  <a
+                    href="https://zh.fin101.ru/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-apple-blue hover:underline"
+                  >
+                    • zh.fin101.ru（无需魔法）
+                  </a>
+                </div>
+              </div>
+
+              <div className="bg-gray-50 rounded-xl p-6">
+                <h4 className="text-xl font-semibold mb-3">Project Gutenberg</h4>
+                <p className="text-apple-text-secondary mb-3">
+                  全球最大的公版书库，提供超过 70,000 本免费电子书，EPUB 结构标准，兼容性好。
+                </p>
+                <a
+                  href="https://www.gutenberg.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-apple-blue hover:underline"
+                >
+                  网址：gutenberg.org
+                </a>
+              </div>
+
+              <div className="bg-gray-50 rounded-xl p-6">
+                <h4 className="text-xl font-semibold mb-3">Standard Ebooks</h4>
+                <p className="text-apple-text-secondary mb-3">
+                  基于公版书进行精心排版和设计的高质量电子书，阅读体验极佳。
+                </p>
+                <a
+                  href="https://standardebooks.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-apple-blue hover:underline"
+                >
+                  网址：standardebooks.org
+                </a>
+              </div>
+            </div>
+          </div>
+
           {/* 开始阅读 */}
           <div>
             <h3 className="text-2xl font-semibold mb-6">开始阅读</h3>
