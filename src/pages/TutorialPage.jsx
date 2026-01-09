@@ -1,5 +1,16 @@
 import TutorialSection from '../components/TutorialSection'
-import ImagePlaceholder from '../components/ImagePlaceholder'
+import tutorial01 from '../assets/images/tutorial-01.png'
+import tutorial02 from '../assets/images/tutorial-02.png'
+import tutorial03 from '../assets/images/tutorial-03.png'
+import tutorial04 from '../assets/images/tutorial-04.png'
+import tutorial07 from '../assets/images/tutorial-07.png'
+import tutorial08 from '../assets/images/tutorial-08.png'
+import tutorial09 from '../assets/images/tutorial-09.png'
+import tutorial10 from '../assets/images/tutorial-10.png'
+import tutorial11 from '../assets/images/tutorial-11.png'
+import tutorial13 from '../assets/images/tutorial-13.png'
+import tutorial14 from '../assets/images/tutorial-14.png'
+import tutorial15 from '../assets/images/tutorial-15.png'
 
 const TutorialPage = () => {
   return (
@@ -56,8 +67,8 @@ const TutorialPage = () => {
               </li>
             </ul>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <ImagePlaceholder title="书库界面" filename="tutorial-01.png" />
-              <ImagePlaceholder title="文件选择器" filename="tutorial-02.png" />
+              <img src={tutorial01} alt="书库界面" className="w-full rounded-2xl shadow-lg" />
+              <img src={tutorial02} alt="文件选择器" className="w-full rounded-2xl shadow-lg" />
             </div>
           </div>
 
@@ -145,7 +156,7 @@ const TutorialPage = () => {
                 <span className="text-apple-text-secondary">在 Overlay 菜单中点击"设置"可自定义排版和主题</span>
               </li>
             </ul>
-            <ImagePlaceholder title="阅读器界面" filename="tutorial-03.png" />
+            <img src={tutorial03} alt="阅读器界面" className="w-full rounded-2xl shadow-lg" />
           </div>
 
           {/* 即时查词 */}
@@ -173,8 +184,8 @@ const TutorialPage = () => {
               </li>
             </ul>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <ImagePlaceholder title="查词前（单击单词）" filename="tutorial-03.png" />
-              <ImagePlaceholder title="查词后（悬浮词卡）" filename="tutorial-04.png" />
+              <img src={tutorial03} alt="查词前（单击单词）" className="w-full rounded-2xl shadow-lg" />
+              <img src={tutorial04} alt="查词后（悬浮词卡）" className="w-full rounded-2xl shadow-lg" />
             </div>
           </div>
 
@@ -198,7 +209,6 @@ const TutorialPage = () => {
                 <span className="text-apple-text-secondary">已收藏单词在原文中显示为橙色</span>
               </li>
             </ul>
-            <ImagePlaceholder title="查词后自动收藏" filename="tutorial-05.png" />
           </div>
         </div>
       </TutorialSection>
@@ -230,7 +240,7 @@ const TutorialPage = () => {
                 <span className="text-apple-text-secondary">翻页模式 / 滚动模式切换</span>
               </li>
             </ul>
-            <ImagePlaceholder title="阅读设置界面" filename="tutorial-07.png" />
+            <img src={tutorial07} alt="阅读设置界面" className="w-full rounded-2xl shadow-lg" />
           </div>
 
           {/* 章节跳转 */}
@@ -253,7 +263,7 @@ const TutorialPage = () => {
                 <span className="text-apple-text-secondary">点击章节名即可跳转</span>
               </li>
             </ul>
-            <ImagePlaceholder title="章节目录" filename="tutorial-08.png" />
+            <img src={tutorial08} alt="章节目录" className="w-full rounded-2xl shadow-lg" />
           </div>
         </div>
       </TutorialSection>
@@ -281,7 +291,7 @@ const TutorialPage = () => {
                 <span className="text-apple-text-secondary">支持搜索和排序</span>
               </li>
             </ul>
-            <ImagePlaceholder title="生词列表" filename="tutorial-09.png" />
+            <img src={tutorial09} alt="生词列表" className="w-full rounded-2xl shadow-lg" />
           </div>
 
           {/* 语境详情 */}
@@ -305,8 +315,8 @@ const TutorialPage = () => {
               </li>
             </ul>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <ImagePlaceholder title="生词详情（语境列表）" filename="tutorial-10.png" />
-              <ImagePlaceholder title="语境回溯" filename="tutorial-11.png" />
+              <img src={tutorial10} alt="生词详情（语境列表）" className="w-full rounded-2xl shadow-lg" />
+              <img src={tutorial11} alt="语境回溯" className="w-full rounded-2xl shadow-lg" />
             </div>
           </div>
         </div>
@@ -335,7 +345,6 @@ const TutorialPage = () => {
                 <span className="text-apple-text-secondary"><strong>语境回顾</strong>：查看待复习数量，点击进入复习流程</span>
               </li>
             </ul>
-            <ImagePlaceholder title="复习页面" filename="tutorial-12.png" />
           </div>
 
           {/* 语境回顾 */}
@@ -367,8 +376,8 @@ const TutorialPage = () => {
               </li>
             </ul>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <ImagePlaceholder title="语境回顾界面" filename="tutorial-13.png" />
-              <ImagePlaceholder title="五级反馈选择" filename="tutorial-14.png" />
+              <img src={tutorial13} alt="语境回顾界面" className="w-full rounded-2xl shadow-lg" />
+              <img src={tutorial14} alt="五级反馈选择" className="w-full rounded-2xl shadow-lg" />
             </div>
           </div>
         </div>
@@ -397,7 +406,7 @@ const TutorialPage = () => {
                 <span className="text-apple-text-secondary">后台自动同步，无需手动操作</span>
               </li>
             </ul>
-            <ImagePlaceholder title="设置中的云同步开关" filename="tutorial-15.png" />
+            <img src={tutorial15} alt="设置中的云同步开关" className="w-full rounded-2xl shadow-lg" />
           </div>
 
           {/* 同步状态 */}
@@ -420,7 +429,6 @@ const TutorialPage = () => {
                 <span className="text-apple-text-secondary">手动触发同步</span>
               </li>
             </ul>
-            <ImagePlaceholder title="同步状态显示" filename="tutorial-16.png" />
           </div>
         </div>
       </TutorialSection>
