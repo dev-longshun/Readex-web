@@ -24,6 +24,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/resources" className="text-sm text-apple-text-secondary hover:text-apple-blue transition-colors">
+                  书籍资源
+                </Link>
+              </li>
+              <li>
                 <Link to="/tutorial" className="text-sm text-apple-text-secondary hover:text-apple-blue transition-colors">
                   使用教程
                 </Link>
