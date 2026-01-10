@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import wechatQrcode from '../assets/images/wechat-group-qrcode.png'
 
 const HomePage = () => {
@@ -13,6 +13,11 @@ const HomePage = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = useState(false)
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
+
+  // 触摸状态
+  const [touches, setTouches] = useState([])
+  const [initialPinchDistance, setInitialPinchDistance] = useState(0)
+  const [initialScale, setInitialScale] = useState(1)
 
   // FAQ 分类
   const categories = [
@@ -188,7 +193,11 @@ const HomePage = () => {
 
   // 开始拖拽
   const handleMouseDown = (e) => {
-    if (e.target === e.currentTarget) {
+    // 检查点击的是否是问题卡片（通过 data 属性标记）
+    const clickedCard = e.target.closest('[data-faq-card]')
+
+    // 如果没有点击卡片，允许拖拽
+    if (!clickedCard) {
       setIsDragging(true)
       setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y })
     }
@@ -210,6 +219,61 @@ const HomePage = () => {
     setIsDragging(false)
   }
 
+  // 计算两点之间的距离（用于触摸缩放）
+  const getDistance = (touch1, touch2) => {
+    const dx = touch1.clientX - touch2.clientX
+    const dy = touch1.clientY - touch2.clientY
+    return Math.sqrt(dx * dx + dy * dy)
+  }
+
+  // 触摸开始
+  const handleTouchStart = (e) => {
+    // 检查触摸的是否是问题卡片
+    const touch = e.touches[0]
+    const touchedElement = document.elementFromPoint(touch.clientX, touch.clientY)
+    const touchedCard = touchedElement?.closest('[data-faq-card]')
+
+    if (e.touches.length === 1 && !touchedCard) {
+      // 单指拖拽且没有触摸卡片
+      setIsDragging(true)
+      setDragStart({
+        x: touch.clientX - position.x,
+        y: touch.clientY - position.y,
+      })
+    } else if (e.touches.length === 2) {
+      // 双指缩放
+      const distance = getDistance(e.touches[0], e.touches[1])
+      setInitialPinchDistance(distance)
+      setInitialScale(scale)
+      setIsDragging(false)
+    }
+  }
+
+  // 触摸移动
+  const handleTouchMove = (e) => {
+    e.preventDefault()
+
+    if (e.touches.length === 1 && isDragging) {
+      // 单指拖拽
+      setPosition({
+        x: e.touches[0].clientX - dragStart.x,
+        y: e.touches[0].clientY - dragStart.y,
+      })
+    } else if (e.touches.length === 2) {
+      // 双指缩放
+      const distance = getDistance(e.touches[0], e.touches[1])
+      const scaleRatio = distance / initialPinchDistance
+      const newScale = Math.max(0.5, Math.min(2, initialScale * scaleRatio))
+      setScale(newScale)
+    }
+  }
+
+  // 触摸结束
+  const handleTouchEnd = () => {
+    setIsDragging(false)
+    setTouches([])
+  }
+
   // 点击问题卡片
   const handleCardClick = (faq) => {
     setSelectedQuestion(faq)
@@ -217,16 +281,58 @@ const HomePage = () => {
 
   // 重置视图
   const resetView = () => {
-    setScale(1)
+    const questionCount = filteredQuestions.length
+
+    // 计算网格的大致尺寸
+    const cardWidth = 180
+    const cardHeight = 110
+    const gap = 24 // gap-6 = 24px
+
+    // 根据屏幕宽度计算列数
+    const getColumns = () => {
+      if (typeof window === 'undefined') return 5
+      const width = window.innerWidth
+      if (width < 768) return 2 // md
+      if (width < 1024) return 3 // lg
+      if (width < 1280) return 4 // xl
+      return 5
+    }
+
+    const columns = getColumns()
+    const rows = Math.ceil(questionCount / columns)
+
+    // 计算网格总尺寸
+    const gridWidth = columns * cardWidth + (columns - 1) * gap
+    const gridHeight = rows * cardHeight + (rows - 1) * gap
+
+    // 容器尺寸
+    const containerWidth = 1200 // max-w-6xl
+    const containerHeight = 600 // 固定高度
+
+    // 目标占据 80% 的容器空间
+    const targetWidth = containerWidth * 0.8
+    const targetHeight = containerHeight * 0.8
+
+    // 计算需要的缩放比例（取较小值确保完全显示）
+    const scaleX = targetWidth / gridWidth
+    const scaleY = targetHeight / gridHeight
+    const newScale = Math.min(scaleX, scaleY, 1) // 不超过 1
+
+    setScale(newScale)
     setPosition({ x: 0, y: 0 })
   }
 
   // 切换分类时重置视图
   const handleCategoryChange = (categoryId) => {
     setSelectedCategory(categoryId)
-    resetView()
     setSelectedQuestion(null)
   }
+
+  // 当问题数量变化时（切换分类/搜索），自动调整缩放
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    resetView()
+  }, [filteredQuestions.length])
 
   return (
     <div className="bg-white">
@@ -346,12 +452,13 @@ const HomePage = () => {
           </div>
 
           {/* 视图控制提示 */}
-          <div className="flex items-center justify-center gap-6 mb-6 text-sm text-apple-text-secondary">
+          <div className="flex items-center justify-center gap-4 md:gap-6 mb-6 text-xs md:text-sm text-apple-text-secondary flex-wrap">
             <div className="flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-              <span>滚轮缩放</span>
+              <span className="hidden md:inline">滚轮缩放</span>
+              <span className="md:hidden">双指缩放</span>
             </div>
             <div className="flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -372,12 +479,15 @@ const HomePage = () => {
 
           {/* 网格地图容器 */}
           <div
-            className="relative w-full h-[600px] overflow-hidden bg-apple-gray rounded-2xl mb-6 cursor-grab active:cursor-grabbing"
+            className="relative w-full h-[600px] overflow-hidden bg-apple-gray rounded-2xl mb-6 cursor-grab active:cursor-grabbing select-none touch-none"
             onWheel={handleWheel}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             {/* 网格地图内容 */}
             <div
@@ -392,17 +502,18 @@ const HomePage = () => {
                   <p className="text-apple-text-secondary">没有找到相关问题</p>
                 </div>
               ) : (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 max-w-5xl">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-6xl">
                   {filteredQuestions.map((faq) => (
                     <button
                       key={faq.id}
+                      data-faq-card="true"
                       onClick={() => handleCardClick(faq)}
-                      className={`bg-white rounded-xl p-4 text-left transition-all hover:shadow-lg ${
+                      className={`bg-white rounded-xl p-5 text-left transition-all hover:shadow-lg select-none ${
                         selectedQuestion?.id === faq.id
                           ? 'ring-2 ring-apple-blue shadow-lg'
                           : 'hover:scale-105'
                       }`}
-                      style={{ minWidth: '180px', minHeight: '100px' }}
+                      style={{ minWidth: '180px', minHeight: '110px' }}
                     >
                       <div className="flex items-center gap-2 mb-2">
                         <span className={`text-xs px-2 py-1 rounded-full ${
