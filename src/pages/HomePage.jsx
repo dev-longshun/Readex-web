@@ -19,6 +19,9 @@ const HomePage = () => {
   const [initialPinchDistance, setInitialPinchDistance] = useState(0)
   const [initialScale, setInitialScale] = useState(1)
 
+  // 侧滑动画状态
+  const [isDetailAnimating, setIsDetailAnimating] = useState(false)
+
   // FAQ 分类
   const categories = [
     { id: 'all', name: '全部' },
@@ -334,6 +337,33 @@ const HomePage = () => {
     resetView()
   }, [filteredQuestions.length])
 
+  // ESC 键关闭模态窗口
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (selectedQuestion) {
+          setSelectedQuestion(null)
+        }
+        if (isModalOpen) {
+          setIsModalOpen(false)
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [selectedQuestion, isModalOpen])
+
+  // 侧滑动画效果
+  useEffect(() => {
+    if (selectedQuestion) {
+      // 小延迟触发动画
+      setIsDetailAnimating(true)
+    } else {
+      setIsDetailAnimating(false)
+    }
+  }, [selectedQuestion])
+
   return (
     <div className="bg-white">
       {/* Hero 区域 */}
@@ -541,48 +571,6 @@ const HomePage = () => {
             )}
           </div>
 
-          {/* 详情面板 */}
-          {selectedQuestion && (
-            <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden animate-fade-in">
-              {/* 详情头部 */}
-              <div className="bg-apple-blue px-6 py-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs px-3 py-1 bg-white/20 rounded-full text-white">
-                    {categories.find(c => c.id === selectedQuestion.category)?.name || '其他'}
-                  </span>
-                  <h3 className="text-lg font-semibold text-white">
-                    {selectedQuestion.question}
-                  </h3>
-                </div>
-                <button
-                  onClick={() => setSelectedQuestion(null)}
-                  className="text-white/80 hover:text-white transition-colors"
-                  aria-label="关闭"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-
-              {/* 详情内容 */}
-              <div className="px-6 py-6">
-                <p className="text-apple-text-secondary leading-relaxed text-lg">
-                  {selectedQuestion.answer}
-                </p>
-                {selectedQuestion.image && (
-                  <div className="mt-6">
-                    <img
-                      src={selectedQuestion.image}
-                      alt={selectedQuestion.question}
-                      className="rounded-xl shadow-sm max-w-full h-auto"
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
           {/* 没有找到答案 */}
           <div className="max-w-3xl mx-auto mt-8 text-center">
             <p className="text-apple-text-secondary text-sm">
@@ -630,6 +618,60 @@ const HomePage = () => {
             <p className="text-center text-apple-text-secondary mt-4 text-sm">
               微信扫一扫，加入交流群
             </p>
+          </div>
+        </div>
+      )}
+
+      {/* FAQ 详情侧滑界面 */}
+      {selectedQuestion && (
+        <div
+          className="fixed inset-0 z-50 bg-white overflow-y-auto"
+          style={{
+            transform: isDetailAnimating ? 'translateX(0)' : 'translateX(100%)',
+            transition: 'transform 0.3s ease-in-out'
+          }}
+        >
+          {/* 顶部导航栏 */}
+          <div className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b border-gray-200 px-4 py-4 flex items-center gap-4">
+            <button
+              onClick={() => setSelectedQuestion(null)}
+              className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors active:bg-gray-200"
+              aria-label="返回"
+            >
+              <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full font-medium">
+                  {categories.find(c => c.id === selectedQuestion.category)?.name || '其他'}
+                </span>
+              </div>
+              <h2 className="text-lg font-bold text-gray-900 truncate">
+                {selectedQuestion.question}
+              </h2>
+            </div>
+          </div>
+
+          {/* 内容区域 */}
+          <div className="px-4 md:px-6 py-6 pb-20 max-w-4xl mx-auto">
+            <div className="prose prose-lg max-w-none">
+              <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                {selectedQuestion.answer}
+              </div>
+
+              {selectedQuestion.image && (
+                <div className="mt-8">
+                  <img
+                    src={selectedQuestion.image}
+                    alt={selectedQuestion.question}
+                    className="rounded-xl shadow-sm w-full"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

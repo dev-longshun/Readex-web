@@ -41,19 +41,19 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">支持</h3>
             <ul className="space-y-2">
               <li>
-                <a href="./privacy-policy.html" className="text-sm text-apple-text-secondary hover:text-apple-blue transition-colors">
+                <Link to="/privacy-policy" className="text-sm text-apple-text-secondary hover:text-apple-blue transition-colors">
                   隐私政策
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="./terms-of-service.html" className="text-sm text-apple-text-secondary hover:text-apple-blue transition-colors">
+                <Link to="/terms-of-service" className="text-sm text-apple-text-secondary hover:text-apple-blue transition-colors">
                   用户协议
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="./support.html" className="text-sm text-apple-text-secondary hover:text-apple-blue transition-colors">
+                <Link to="/support" className="text-sm text-apple-text-secondary hover:text-apple-blue transition-colors">
                   技术支持
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
