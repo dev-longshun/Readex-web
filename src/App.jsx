@@ -2,6 +2,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
+import ResourcesPage from './pages/ResourcesPage'
 import TutorialPage from './pages/TutorialPage'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/resources" element={<ResourcesPage />} />
             <Route path="/tutorial" element={<TutorialPage />} />
           </Routes>
         </main>

@@ -23,6 +23,12 @@ const Header = () => {
               首页
             </Link>
             <Link
+              to="/resources"
+              className={`text-sm font-medium transition-colors ${isActive('/resources')}`}
+            >
+              书籍资源
+            </Link>
+            <Link
               to="/tutorial"
               className={`text-sm font-medium transition-colors ${isActive('/tutorial')}`}
             >

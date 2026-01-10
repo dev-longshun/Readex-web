@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import wechatQrcode from '../assets/images/wechat-group-qrcode.png'
 
 const HomePage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   return (
     <div className="bg-white">
       {/* Hero 区域 */}
@@ -17,19 +20,50 @@ const HomePage = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/tutorial"
+              to="/resources"
               className="inline-block bg-apple-blue text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-blue-600 transition-colors"
+            >
+              书籍资源
+            </Link>
+            <Link
+              to="/tutorial"
+              className="inline-block bg-apple-text-primary text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-800 transition-colors"
             >
               查看使用教程
             </Link>
-            <a
-              href="https://apps.apple.com/app/id6757144437"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-apple-text-primary text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-800 transition-colors"
-            >
-              从 App Store 下载
-            </a>
+          </div>
+
+          {/* 微信引流卡片 */}
+          <div className="mt-12 max-w-2xl mx-auto">
+            <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm">
+              <div className="flex flex-col md:flex-row items-center gap-6">
+                {/* 二维码 */}
+                <div
+                  className="flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  <img
+                    src={wechatQrcode}
+                    alt="微信群二维码（点击放大）"
+                    className="w-32 h-auto md:w-40 rounded-xl object-contain"
+                  />
+                  <p className="text-xs text-center text-apple-text-secondary mt-2">
+                    点击放大
+                  </p>
+                </div>
+
+                {/* 引导文案 */}
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="text-xl font-semibold mb-2">加入微信交流群</h3>
+                  <p className="text-apple-text-secondary mb-3">
+                    分享书单 · 反馈问题 · 交流学习心得
+                  </p>
+                  <p className="text-sm text-apple-text-secondary">
+                    关注公众号 <span className="font-medium text-apple-text-primary">『键盘慢点敲』</span> 获取最新动态
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -75,6 +109,39 @@ const HomePage = () => {
           </p>
         </div>
       </section>
+
+      {/* 二维码放大模态框 */}
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div
+            className="relative max-w-md w-full bg-white rounded-2xl p-6 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* 关闭按钮 */}
+            <button
+              className="absolute -top-3 -right-3 w-10 h-10 bg-gray-900 hover:bg-gray-700 text-white rounded-full flex items-center justify-center transition-colors shadow-lg"
+              onClick={() => setIsModalOpen(false)}
+              aria-label="关闭"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <img
+              src={wechatQrcode}
+              alt="微信群二维码"
+              className="w-full h-auto rounded-xl"
+            />
+            <p className="text-center text-apple-text-secondary mt-4 text-sm">
+              微信扫一扫，加入交流群
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
