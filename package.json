@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && rsync -av --delete --exclude='.git' dist/ docs/ && cd docs && git add . && git commit -m 'deploy: 更新官网' && git push"
+    "deploy": "npm run build && rm -rf docs && cp -r dist docs && git add docs && git commit -m 'chore: 部署更新' && git push"
   },
   "dependencies": {
     "pinyin-pro": "^3.27.0",
