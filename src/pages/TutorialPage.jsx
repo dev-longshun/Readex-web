@@ -34,7 +34,7 @@ const TutorialPage = () => {
           <div>
             <h3 className="text-2xl font-semibold mb-6">导入你的第一本书</h3>
             <p className="text-lg text-apple-text-secondary mb-8 leading-relaxed">
-              Readex 支持 EPUB 和 TXT 两种格式的书籍。在导入前请注意：
+              Readex 支持 EPUB、TXT、PDF、Word (.docx) 四种格式的书籍。在导入前请注意：
             </p>
             <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-8 rounded-r-lg">
               <p className="text-yellow-800 font-semibold mb-3">⚠️ 重要提示</p>
@@ -233,7 +233,7 @@ const TutorialPage = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">5 种主题预设（护眼、夜间、羊皮纸等）</span>
+                <span className="text-apple-text-secondary">3 种主题预设（原始、护眼、夜间）</span>
               </li>
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
@@ -311,7 +311,7 @@ const TutorialPage = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-apple-blue mr-3">•</span>
-                <span className="text-apple-text-secondary">高级版支持语境回溯功能</span>
+                <span className="text-apple-text-secondary">支持语境回溯功能</span>
               </li>
             </ul>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

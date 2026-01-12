@@ -8,6 +8,7 @@ import TutorialPage from './pages/TutorialPage'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
 import TermsOfServicePage from './pages/TermsOfServicePage'
 import SupportPage from './pages/SupportPage'
+import ChangelogPage from './pages/ChangelogPage'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -30,6 +31,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/resources" element={<ResourcesPage />} />
             <Route path="/tutorial" element={<TutorialPage />} />
+            <Route path="/changelog" element={<ChangelogPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/terms-of-service" element={<TermsOfServicePage />} />
             <Route path="/support" element={<SupportPage />} />

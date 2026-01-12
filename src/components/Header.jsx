@@ -34,6 +34,12 @@ const Header = () => {
             >
               使用教程
             </Link>
+            <Link
+              to="/changelog"
+              className={`text-sm font-medium transition-colors ${isActive('/changelog')}`}
+            >
+              更新日志
+            </Link>
           </nav>
 
           {/* 移动端菜单按钮（后续可扩展） */}

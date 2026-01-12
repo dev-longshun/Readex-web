@@ -122,7 +122,7 @@ const ResourcesPage = () => {
               </li>
               <li className="flex items-start">
                 <span className="mr-2">•</span>
-                <span>Readex 支持 EPUB 和 TXT 两种格式的书籍</span>
+                <span>Readex 支持 EPUB、TXT、PDF、Word (.docx) 四种格式的书籍</span>
               </li>
             </ul>
           </div>
