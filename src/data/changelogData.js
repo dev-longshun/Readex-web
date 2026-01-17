@@ -9,6 +9,15 @@ const changelogTypes = {
 // 更新日志原始数据
 const changelogDataRaw = [
   {
+    version: "1.0.6",
+    date: "2026-01-14",
+    items: [
+      { type: "feat", content: "新增滚动模式下右滑退出阅读功能" },
+      { type: "feat", content: "新增版本更新检测与自动弹窗提示" },
+      { type: "optimize", content: "优化网络词典页面内容展示" },
+    ],
+  },
+  {
     version: "1.0.5",
     date: "2026-01-12",
     items: [
