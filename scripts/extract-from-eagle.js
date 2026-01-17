@@ -19,7 +19,7 @@ const CONFIG = {
   outputDataPath: path.join(__dirname, "../src/data/booksData.js"),
   outputCoversPath: path.join(__dirname, "../public/images/books"),
   // 网站 base 路径（与 vite.config.js 中的 base 保持一致）
-  basePath: "/Readex-web",
+  basePath: "",
   // 要提取的文件夹 ID（神奇树屋 EPUB）
   targetFolderIds: {
     MKI9D2CGC6NXZ: { series: "神奇树屋", season: "第一季" },
